@@ -1,0 +1,46 @@
+
+.icon-bar {
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index:2;
+    right: 2.2%;
+  }
+  
+  .icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 09px 06px 09px 06px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+    margin-top:2px ;
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000;
+  }
+  
+ 
+  
+  .google {
+    background:  rgb(18,86,136);
+    color: white;
+  }
+  
+  .whatsapp {
+    background: rgb(37,211,102);
+    color: white;
+  }
+  
+  .youtube {
+    background: rgb(221,75,57);
+    color: white;
+  }
+  
+  .content {
+    margin-left: 75px;
+    font-size: 30px;
+  }
