@@ -16,10 +16,10 @@ router.use("/enquiry/", require("./enquiry"))
 router.use("/certificate/", require("./certificate"))
 router.use("/reports", require("./reports"))
 router.use("/dashboard", require("./dashboard.js"))
-
 router.use("/employee/", require("./employee"))
-
-
+router.use("/customizehome/", require("./web_customize/home"));
+router.use("/customizeabout/", require("./web_customize/about"));
+router.use("/customizeservices/", require("./web_customize/services"));
 
 
 //not found checker

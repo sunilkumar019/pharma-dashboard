@@ -10,4 +10,4 @@ router.post('/update', check_auth, employeeHandler.updateEmployee)
 
 router.get('/delete/:Id', check_auth, employeeHandler.deleteEmployee)
 
-module.exports = router
+module.exports = router;

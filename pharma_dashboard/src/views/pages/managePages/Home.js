@@ -15,19 +15,33 @@ import {
   CardTitle,
   Row
 } from "reactstrap";
-import Slider from "./slider/Slider";
+import Slider from './slider/Slider';
 import { GetType } from "src/api/products/productType/productType";
 import { GetAbout } from "src/api/about/about.js";
 import Bannerimage from "../../../assets/dashboard/banner.jpg";
+import { Link } from "react-router-dom";
+import { UserProfile } from "src/api/user/user";
 
 
 
-const Home = () => {
+const Home = (props) => {
   const [data, setData] = useState([]);
   const [banner, setBanner] = useState("");
   const [loading, setLoading] = useState(true);
+  const [noOfElement, setnoOfElement] = useState(8);
+  const [user, setUser] = useState('');
+
+  const slice = data.slice(0, noOfElement);
 
 
+  const viewAll = () => {
+
+    setnoOfElement(noOfElement + noOfElement);
+  
+    
+  }
+
+  //Product category
   async function getType() {
     let rs = await GetType();
     if (rs.success === true) {
@@ -36,11 +50,23 @@ const Home = () => {
     setLoading(false);
   }
 
+  useEffect(() => {
+    const getUser = async () => {
+      let rs = await UserProfile();
+
+      if (rs.success === true) {
+        setUser(rs.data);
+      }
+    }
+    getUser();
+  }, []);
+
+
+  //banner
   async function getAbout() {
     let res = await GetAbout();
-
     if (
-      res.success !== true &&
+      res.success === true &&
       res.data != null &&
       res.data.about_img != null
     ) {
@@ -53,102 +79,65 @@ const Home = () => {
 
   useEffect(() => {
     getType();
-
-    getAbout();
+    getAbout()
   }, []);
 
 
+  
   return (
     <div>
       {/*carousel*/}
-     <Slider/>
+      <Slider />
+
 
       {/*welcome*/}
-      
-        <div className="container pt-5">
-          <div className="row text py-3" >
-            <div className="col-lg-12 m-auto">
-              <h1 className="h1 pl-3 animated pulse slower infinite"><span className="text-success slide-out-right">Welcome To</span> Pharma Biotech Pvt.Ltd</h1>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa cum ea quia aspernatur aliquam dignissimos alias eos dicta illum exercitationem Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, blanditiis?
-              </p>
-            </div>
+
+      <div className="container pt-5">
+        <div className="row text py-3">
+          <div className="col-lg-12 m-auto">
+            <h1 className="h1 pl-3 animated pulse slower infinite "><span className=" slide-out-right text-dark">Welcome To</span>&nbsp;<span className="globalColor10">{user.company}</span></h1>
+            <p>{props.value.about}
+            </p>
           </div>
         </div>
+      </div>
 
 
-        {/*our products*/}
-        <section className="">
-          <div className="container ">
-            <div className="row text-center py-3">
-              <div className="col-lg-6 m-auto">
-                <h1 className="h3 text-muted">Our Products</h1>
-              </div>
-            </div>
-            <div className="row text-center">
-              <div className="col-12 col-md-3 mb-4 ">
-                <div className="card h-70 border border-dark rounded">
-                  <a href="#">
-                    <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/Dexozyme.jpg" className="card-img-top" alt="..." />
-                  </a>
-
-                </div>
-                <div className="card-body  py-1 bg-dark">
-
-                  <a href="#" className="h6 text-decoration-none  text-light">Dexozayme</a>
-
-
-                </div>
-              </div>
-              <div className="col-12 col-md-3 mb-4">
-                <div className="card h-70  border border-dark rounded">
-                  <a href="#">
-                    <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/Cefdex-S.jpg" className="card-img-top" alt="..." />
-                  </a>
-
-                </div>
-                <div className="card-body   py-1 bg-dark">
-
-                  <a href="#" className="h6 text-decoration-none  text-light">Cofdex</a>
-
-
-                </div>
-              </div>
-              <div className="col-12 col-md-3 mb-4">
-                <div className="card h-70  border border-dark rounded">
-                  <a href="#">
-                    <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/Cefdex-S.jpg" className="card-img-top" alt="..." />
-                  </a>
-
-                </div>
-                <div className="card-body py-1 bg-dark">
-
-                  <a href="#" className="h6 text-decoration-none  text-light">Cofdex</a>
-
-
-                </div>
-              </div>
-              <div className="col-12 col-md-3 mb-4">
-                <div className="card h-70  border border-dark rounded">
-                  <a href="#">
-                    <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/Acedex-P-1.jpg" className="card-img-top" alt="..." />
-                  </a>
-
-                </div>
-                <div className="card-body py-1 bg-dark">
-
-                  <a href="#" className="h6  text-decoration-none text-light">Acedex</a>
-
-
-                </div>
-              </div>
-
+      {/*our products*/}
+     
+      <section >
+        <div className="container ">
+          <div className="row text-center py-4 ">
+            <div className="col-lg-6 m-auto">
+              <h1 className="h3 text-dark"><b>Our <span className="globalColor10">Products</span></b></h1>
             </div>
           </div>
-        </section>
-      
+          <div className="row text-center mt-2">
+            {
+              props.pro.slice(0,4).map((item)=> {
+                return (
+                  <>
+                    <div className="col-12 col-md-3 mb-5 ">
+                      <CCard className="shadow rounded  card19" >
+                        <a href="#">
+                          <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/Cefdex-200-300x300.jpg" className="card-img-top" style={{height:"250px", width:"100%"}} alt="medicine" />
+                        </a>
+                      </CCard>
+                      <CCardBody className=" py-2 bg-dark">
+
+                        <a href="#" className="h6 text-decoration-none  text-light">{item.name}</a>
+                       </CCardBody>
+                    </div>
+                  </>
+                )
+              })
+            }
+
+
+          </div>
+        </div>
+      </section >
+
 
       {/* cards*/}
       <section className="bg-light py-5 mt-5">
@@ -216,21 +205,22 @@ const Home = () => {
         <div className="container py-5">
           <div className="row text-center py-3">
             <div className="col-lg-6 m-auto">
-              <h1 className="h3 text-muted">Pharma Biotech Medicines</h1>
+              <h1 className="h3 text-dark"><span>{user.company}</span>&nbsp;<span className="globalColor10">Medicines</span></h1>
             </div>
           </div>
           {loading ? (
             <div className="loader"></div>
           ) : (<CRow xs={{ cols: 1 }} md={{ cols: 3 }} className="g-4">
             {
-              data.map((items) => {
+              slice.map((items) => {
                 return (
                   <>
+                  
                     <CCol sm={3} style={{ float: "left" }}  >
-                      <CCard className="h-60 w-100 bg-danger align-items-center text-center card19 ">
+                      <CCard className="h-60 w-100  align-items-center text-center card19 "style={{backgroundColor:"rgb(225,32,77)"}}>
 
                         <CCardBody >
-                        
+
                           <CCardTitle className=" h5 text-center py-4">{items.name}</CCardTitle>
                         </CCardBody>
 
@@ -239,7 +229,9 @@ const Home = () => {
                   </>
                 )
               })
+              
             }
+            <div className="col-12 d-flex justify-content-center mt-2  "><a className="btn btn" onClick={() => viewAll()} style={{ backgroundColor: "rgb(48,60,84)", }}> <b>View All</b> </a></div>
           </CRow>
 
           )}
@@ -333,7 +325,7 @@ const Home = () => {
             </CCol>
             <br />
           </CRow>
-        */} 
+        */}
         </div>
       </section>
 
@@ -342,7 +334,7 @@ const Home = () => {
         <CCard>
           <CCardBody>
             <CRow>
-              <img alt="banner" style={{ width: "100%" }} src={banner} />
+              <img alt="pharma banner" style={{ width: "100%" }} src={banner} />
             </CRow>
           </CCardBody>
         </CCard>
@@ -355,16 +347,16 @@ const Home = () => {
           <div className="row text-center" >
             <div className="col-12 col-md-6 mb-4 " >
               <div className="card h-70 " style={{ borderRadius: "10px" }}>
-                <a href="#">
+                <Link to='/Categorytable'>
                   <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/tablet-new-banner.jpg" className="card-img-top " style={{ borderRadius: "10px" }} alt="..." />
-                </a>
+                </Link>
 
               </div>
 
             </div>
             <div className="col-12 col-md-6 mb-4">
               <div className="card h-70 " style={{ borderRadius: "10px" }}>
-                <a href="#">
+                <a href="/Categorytable">
                   <img src="https://www.dexonbiotech.com/wp-content/uploads/2022/03/product-banner-1.jpg" className="card-img-top " style={{ borderRadius: "10px" }} alt="..." />
                 </a>
 
@@ -387,7 +379,7 @@ const Home = () => {
         }}>
           <div className="row justify-content-center  text-center">
             <div className="col-3 text-center">
-              <h1 className="h3 text-muted  ">Our Services</h1>
+              <h1 className="h3 text-light  "><b>Our Services</b></h1>
               <hr className="w-25 mx-auto text-dark" style={{ height: "2px" }} />
             </div>
           </div>
@@ -441,7 +433,7 @@ const Home = () => {
               </div>
             </div>
             <div className="col-md-9 text-start text-md-start order-md-0">
-              <h1 className="h3 text-muted lh-base">Our <span className="text-success">Vision</span></h1>
+              <h1 className="h3 globalColor10 lh-base"><b>Our Vision</b></h1>
               <hr className="text-dark mx-auto mx-md-0" style={{ height: "0px", width: "0px" }} />
               <p >Our dedicated patient engagement app and web portal allow you to access information instantaneously (no tedeous form, long calls, or administrative hassle) and securely</p>
 
@@ -463,7 +455,7 @@ const Home = () => {
               </div>
             </div>
             <div className="col-md-9 text-start text-md-start">
-              <h1 className="h3 text-muted lh-base">Our <span className="text-success">Mission</span></h1>
+              <h1 className="h3 globalColor10 lh-base"><b>Our Mission</b></h1>
               <hr className="text-dark mx-auto mx-md-0" style={{ height: "0px", width: "0px" }} />
               <p>Jassa provides progressive, and affordable healthcare, accessible on mobile and online for everyone. To us, it’s not just work. We take pride in the solutions we deliver</p>
 
@@ -484,7 +476,7 @@ const Home = () => {
 
             </div>
             <div className="col-md-9 text-start text-md-start order-md-0">
-              <h1 className="h3 text-muted lh-base">Products <span className="text-success">Detail</span></h1>
+              <h1 className="h3 globalColor10 lh-base"><b>Products Detail</b></h1>
               <hr className="text-dark mx-auto mx-md-0" style={{ height: "0px", width: "0px" }} />
               <p>Our dedicated patient engagement app and web portal allow you to access information instantaneously (no tedeous form, long calls, or administrative hassle) and securely</p>
 
@@ -499,7 +491,7 @@ const Home = () => {
 
           <div className="row text-start" >
             <div className="col-12 col-md-6 mb-4 " >
-              <h1 className="h3 text-muted lh-base">Products <span className="text-success">Detail</span></h1>
+              <h1 className="h3 text-dark lh-base"><b>Products <span className="globalColor10">Detail</span></b></h1>
               <hr className="text-dark mx-auto mx-md-0" style={{ height: "0px", width: "0px" }} />
               <p>One can only get the benefits of owning a pharma franchise if that person invests in the right pharma franchise company. With the growth of the pharma industry, you will see the many options for the pharma franchise in the market. This sometimes makes it difficult for the investor to choose the right pharma franchise company and as a result, they often go for the wrong one. Here are some points that can help you going for the right pharma franchise company:</p>
 

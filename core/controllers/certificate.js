@@ -15,12 +15,13 @@ exports.addCertificate = async(Image, data) => {
     if (Image)
         data.image = Image.path;
 
-    let newcertificate = {
+     let newcertificate = {
         title: data.title,
         description: data.description,
         image: data.image,
         created_on: new Date(Date.now())
     }
+    
     let savedcertificate = await addCertificate(newcertificate);
 
     delete savedcertificate.__v
