@@ -3,9 +3,10 @@ const serviceController = require("../../../../core/controllers/web_customize/se
 
 
 const addServices = async (req, res, next) => {
+    console.log(req.body)
 
     try {
-        let customize = await serviceController.addServices(req.body)
+        let customize = await serviceController.addServices(req.file,req.body)
         req.data = customize
         next()
     }
@@ -31,7 +32,7 @@ const getServices = async (req, res, next) => {
 const updateServices = async (req, res, next) => {
     // console.log(req.body)
     try {
-        let customize = await serviceController.updateServices(req.body)
+        let customize = await serviceController.updateServices(req.file,req.body)
         req.data = customize
         next()
     }

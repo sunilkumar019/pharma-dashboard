@@ -2,16 +2,20 @@ const addHome = require("../../usecases/webUseCases/home/addHome");
 const getHome = require("../../usecases/webUseCases/home/getHome");
 const updateHome = require("../../usecases/webUseCases/home/updateHome");
 const deleteHome =require("../../usecases/webUseCases/home/deleteHome")
+const homeModel =require("../../models/webCustomize/home")
 
 //import moment for date formatting
 const moment = require("moment");
 
 //add method
 exports.addHome = async (value) => {
+
+      await homeModel.deleteMany({})
+
     if (!value.sliderImgs) value.image = null; 
     if (!value.cardList) throw new Error('Card list  is required');
     if (!value.servicesList) throw new Error('Services list  is required');
-    if (!value.product_details) throw new Error('Product details is required');
+    if (!value.productDetails) throw new Error('Product details is required');
 
 
     let cusHome = {
@@ -19,7 +23,7 @@ exports.addHome = async (value) => {
        sliderImgs:value.sliderImgs,
        cardList:value.cardList,
        servicesList:value.servicesList,
-       product_details:value.product_details,
+       productDetails:value.productDetails,
         created_on: new Date(Date.now())
     }
 

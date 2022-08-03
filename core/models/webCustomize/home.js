@@ -9,14 +9,19 @@ const cardSchema = new mongoose.Schema({
     text: { type: String, required: [true, "Text is required"] },
 });;
 const serviceSchema = new mongoose.Schema({
-    heading: { type: String, required: [true, "Heading is required"] },
-    text: { type: String, required: [true, "Text is required"] },
+    serviceHeading: { type: String, required: [true, "Service heading is required"] },
+    serviceCards:[{
+        heading: { type: String, required: [true, "Heading is required"] },
+        text: { type: String, required: [true, "Text is required"] },
+    }]
 });
  
 const ProductsSchema = new mongoose.Schema({
+  
     heading: { type: String, required: [true, "Heading is required"] },
     text: { type: String, required: [true, "Text is required"] },
-});
+ 
+ });
 
 
 const homeSchema = new mongoose.Schema({
@@ -24,7 +29,7 @@ const homeSchema = new mongoose.Schema({
     sliderImgs: [sliderSchema],
     cardList: [cardSchema],
     servicesList: [serviceSchema],
-    product_details: [ProductsSchema],
+    productDetails: [ProductsSchema],
     created_on: { type: Date, default: Date.now },
     modified_on: { type: Date, default: Date.now }
 });
@@ -40,7 +45,7 @@ homeSchema.path("servicesList").validate((code) => {
     return code.length <= 3
 }, "Only 3 cards allowed in services list.");
 
-homeSchema.path("product_details").validate((code) => {
+homeSchema.path("productDetails").validate((code) => {
     return code.length <= 1
 }, "1 heading & text is  allowed in  product details.");
 

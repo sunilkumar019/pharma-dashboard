@@ -5,10 +5,11 @@ const aboutController = require("../../../../core/controllers/web_customize/abou
 
 
 const addAbout = async (req, res, next) => {
-    
-   // console.log(req.body)
+ console.log(req.files)
+  
+ 
     try {
-        let customize = await aboutController.addAbout(req.file,req.body)
+        let customize = await aboutController.addAbout(req.files,req.body)
         req.data = customize
         next()
     }
@@ -37,7 +38,7 @@ const getAbout = async (req, res, next) => {
 const updateAbout = async (req, res, next) => {
     // console.log(req.body)
     try {
-        let customize = await aboutController.updateAbout(req.params.id,req.body)
+        let customize = await aboutController.updateAbout(req.files,req.body)
         req.data = customize
         next()
     }

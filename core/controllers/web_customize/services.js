@@ -1,26 +1,44 @@
 const addServices = require("../../usecases/webUseCases/services/addServices");
-const getServices  = require("../../usecases/webUseCases/services/getServices");
-const updateServices  = require("../../usecases/webUseCases/services/updateServices");
-const deleteServices  =require("../../usecases/webUseCases/services/deleteServices")
+const getServices = require("../../usecases/webUseCases/services/getServices");
+const updateServices = require("../../usecases/webUseCases/services/updateServices");
+const deleteServices = require("../../usecases/webUseCases/services/deleteServices")
+const moveFile = require('move-file');
+const fs = require("fs");
+
+const sizeOf = require('image-size');
+
+const IMG_SIZE = 60000; //60KB
+const IMG_HEIGHT = 500; //500PX
+const IMG_WIDTH = 500; //500PX
+
+
 
 //import moment for date formatting
 const moment = require("moment");
 
 //add method
-exports.addServices = async (value) => {
+exports.addServices = async (Image,value) => {
     if (!value.heading) throw new Error('heading is required');
     if (!value.text) throw new Error('text is required');
- 
-    let item = {
- 
+   
+    value.poster = null;
+    
+
+    if (Image)
+        value.poster = Image.path;
+
+     let items = {
+
+        poster: value.poster,
+        posterText: value.posterText,
         heading: value.heading,
         text: value.text,
         created_on: new Date(Date.now())
     }
 
-    let savedItem = await addServices(item);
-    delete savedItem.__v
-    return savedItem;
+  let savedItem = await addServices(items);
+ delete savedItem.__v
+  return savedItem;
 
 }
 
@@ -42,7 +60,7 @@ exports.updateServices = async (cusprops) => {
     let filter = {}
     if (cusprops.heading) filter.heading = cusprops.heading;
     if (cusprops.text) filter.text = cusprops.text;
-  
+
     let customize = await updateServices(custId, filter);
 
     customize = customize.map(it => {
@@ -59,7 +77,7 @@ exports.updateServices = async (cusprops) => {
 }
 
 //delete method
-exports.deleteServices = async(custId) => {
+exports.deleteServices = async (custId) => {
     if (!custId) throw new Error("Please provide item Id");
 
     let Response = await deleteServices(custId);

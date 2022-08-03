@@ -3,37 +3,41 @@ const getAbout = require("../../usecases/webUseCases/about/getAbout");
 const updateAbout = require("../../usecases/webUseCases/about/updateAbout");
 const deleteAbout = require("../../usecases/webUseCases/about/deleteAbout");
 const moment = require("moment");
-const aboutModel  =require ("../../models/webCustomize/about");
+const aboutModel = require("../../models/webCustomize/about");
+
 
 
 //addAbout
-exports.addAbout = async (Image, val) => {
-    await aboutModel.deleteMany({})
-    if (!val.heading) throw new Error("Heading is required");
-    if (!val.text) throw new Error("text is required");
-    if (!val.cardsList) throw new Error("Cards list is required");
-    if (!val.goalsList) throw new Error('Goals list is required');
- 
+exports.addAbout = async (Image, data) => {
+    // await aboutModel.deleteMany({})
 
-    val.banner = null;
-        if (Image)
-        val.banner = Image.path;
-        let cusAbout = {
-            bannerText: val.bannerText,
-            banner: val.banner,
-            heading: val.heading,
-            text: val.text,
-            cardsList: val.cardsList,
-            goalsList: val.goalsList,
-            created_on: new Date(Date.now())
-        }
-        
-       
-        let saveAbout = await addAbout(cusAbout);
+    if (!data.heading) throw new Error("Heading is required");
+    if (!data.text) throw new Error("text is required");
+    if (!data.cardsList) throw new Error("Cards list is required");
+    if (!data.goalsList) throw new Error('Goals list is required');
 
-        delete saveAbout.__v
-        return saveAbout
- 
+    data.image = null;
+
+    if (Image)
+        data.image = Image.path;
+    //let path ="core/uploads/webCustomize/about/"
+
+    let cusAbout = {
+        bannerText: data.bannerText,
+        bannerImage:data.bannerImage,
+        heading: data.heading,
+       // cardImages:JSON.parse(data.cardImages),
+        text: data.text,
+        cardsList: JSON.parse(data.cardsList),
+        goalsList: JSON.parse(data.goalsList),
+
+        created_on: new Date(Date.now())
+    }
+    console.log(cusAbout)
+    // let saveAbout = await addAbout(cusAbout)
+    // delete saveAbout.__v
+    // return saveAbout
+
 };
 
 //getAbout

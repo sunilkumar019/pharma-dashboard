@@ -97,7 +97,7 @@ app.use('/core/uploads/companyAbout', express.static('core/uploads/companyAbout'
 app.use('/core/uploads/promotinalPics', express.static('core/uploads/promotinalPics'));
 app.use('/assets/images', express.static('assets/images'));
 app.use('/core/uploads/certificates', express.static('core/uploads/certificates'));
-
+app.use('/core/uploads/webCustomize/about',express.static('core/uploads/webCustomize/about'));
 
 let appApi = require('./api/app/routes');
 let webApi = require("./api/web/routes");

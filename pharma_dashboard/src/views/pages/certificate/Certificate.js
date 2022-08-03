@@ -62,7 +62,7 @@ class State extends Component {
   render() {
     return (
       <>
-        {this.state.loading ? <div className="loader"></div> :
+        {this.state.loading ? <div className="loader"></div>:
           <Container className="App">
             <div>
               <Row>
