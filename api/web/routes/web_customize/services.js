@@ -19,7 +19,7 @@ let storage = multer.diskStorage({
   
   let upload = multer({ storage: storage })
   
-router.post('/add',upload.single("poster") ,serviceHandler.addServices);
+router.post('/add',upload.single("bannerImage") ,serviceHandler.addServices);
 
 router.get('/get', serviceHandler.getServices);
 

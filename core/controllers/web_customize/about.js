@@ -4,39 +4,47 @@ const updateAbout = require("../../usecases/webUseCases/about/updateAbout");
 const deleteAbout = require("../../usecases/webUseCases/about/deleteAbout");
 const moment = require("moment");
 const aboutModel = require("../../models/webCustomize/about");
-
-
+const sizeOf = require('image-size');
+const IMAGE_SIZE = 2220000; //220KB
+const IMAGE_HEIGHT = 200; //200PX
+const IMAGE_WIDTH = 250; //250PX
 
 //addAbout
-exports.addAbout = async (Image, data) => {
-    // await aboutModel.deleteMany({})
-
+exports.addAbout = async (aboutImage, data) => {
+   // let uploadError = [];
+     await aboutModel.deleteMany({})
+  //  if (uploadError.length > 0) throw new Error(uploadError.toString())
     if (!data.heading) throw new Error("Heading is required");
     if (!data.text) throw new Error("text is required");
     if (!data.cardsList) throw new Error("Cards list is required");
     if (!data.goalsList) throw new Error('Goals list is required');
 
-    data.image = null;
+    if (aboutImage.bannerImage == null) throw new Error("please update perivous banner")
+    
 
-    if (Image)
-        data.image = Image.path;
-    //let path ="core/uploads/webCustomize/about/"
+    // if (aboutImage.bannerImage) {
+    //     (aboutImage.bannerImage).forEach(it => {
+    //         let img_dimensions = sizeOf(it.path);
+    //         if (it.size > IMAGE_SIZE) uploadError.push(`${it.originalname} has Size more than ${parseInt(IMAGE_SIZE / 2220000)}KB`);
+    //         if (img_dimensions.height > IMAGE_HEIGHT || img_dimensions.width > IMAGE_WIDTH) {
+    //             uploadError.push(`${it.originalname} has Dimensions more than ${IMAGE_HEIGHT} * ${IMAGE_WIDTH}`);
+    //         }
+    //     })
+    // }
 
     let cusAbout = {
         bannerText: data.bannerText,
-        bannerImage:data.bannerImage,
+        bannerImage: data.bannerImage,
         heading: data.heading,
-       // cardImages:JSON.parse(data.cardImages),
         text: data.text,
         cardsList: JSON.parse(data.cardsList),
         goalsList: JSON.parse(data.goalsList),
-
         created_on: new Date(Date.now())
     }
     console.log(cusAbout)
-    // let saveAbout = await addAbout(cusAbout)
-    // delete saveAbout.__v
-    // return saveAbout
+    let saveAbout = await addAbout(cusAbout)
+    delete saveAbout.__v
+    return saveAbout
 
 };
 
