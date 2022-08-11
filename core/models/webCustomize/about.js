@@ -8,10 +8,10 @@ const cardListSchema = new mongoose.Schema({
 
 });
 const goalsSchema = new mongoose.Schema({
-    imageUrl: { type: String, default: null },
+    imageUrl2: { type: String, default: null },
     goals_heading: { type: String, required: [true, "Goals heading is required"] },
     goals_text: { type: String, required: [true, "Goals Text is required"] },
-    float: { type: String, default: "row" }
+    float:{ type: String,default:"row" }
 });
 
 

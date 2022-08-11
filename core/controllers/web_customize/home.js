@@ -8,19 +8,20 @@ const homeModel =require("../../models/webCustomize/home")
 const moment = require("moment");
 
 //add method
-exports.addHome = async (value) => {
-
+exports.addHome = async (homeImages,value) => {
       await homeModel.deleteMany({})
 
-    if (!value.sliderImgs) value.image = null; 
     if (!value.cardList) throw new Error('Card list  is required');
     if (!value.servicesList) throw new Error('Services list  is required');
     if (!value.productDetails) throw new Error('Product details is required');
 
 
+
+
+
     let cusHome = {
 
-       sliderImgs:value.sliderImgs,
+       carouselImages:value.carouselImages,
        cardList:value.cardList,
        servicesList:value.servicesList,
        productDetails:value.productDetails,

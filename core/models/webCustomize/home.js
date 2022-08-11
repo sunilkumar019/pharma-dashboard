@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 
-const sliderSchema = new mongoose.Schema({
-    poster: { type: String, default: null },
-});
+// const sliderSchema = new mongoose.Schema({
+//     poster: { type: Object,default: null },
+// });
 const cardSchema = new mongoose.Schema({
     image: { type: String, default: null },
     text: { type: String, required: [true, "Text is required"] },
@@ -22,11 +22,10 @@ const ProductsSchema = new mongoose.Schema({
     text: { type: String, required: [true, "Text is required"] },
  
  });
-
-
 const homeSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    sliderImgs: [sliderSchema],
+  //  sliderImgs: [sliderSchema],
+    carouselImages: [{ type:Object,default: null }],
     cardList: [cardSchema],
     servicesList: [serviceSchema],
     productDetails: [ProductsSchema],
@@ -49,6 +48,6 @@ homeSchema.path("productDetails").validate((code) => {
     return code.length <= 1
 }, "1 heading & text is  allowed in  product details.");
 
-homeSchema.path("sliderImgs").validate((code) => {
-    return code.length <= 3
-}, "3  slider images are allowed in sliderImgs.");              
+// homeSchema.path("sliderImgs").validate((code) => {
+//     return code.length <= 3
+// }, "3  slider images are allowed in sliderImgs.");              

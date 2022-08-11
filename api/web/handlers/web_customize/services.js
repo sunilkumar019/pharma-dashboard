@@ -6,7 +6,7 @@ const addServices = async (req, res, next) => {
     console.log(req.body)
 
     try {
-        let customize = await serviceController.addServices(req.file,req.body)
+        let customize = await serviceController.addServices(req.body)
         req.data = customize
         next()
     }

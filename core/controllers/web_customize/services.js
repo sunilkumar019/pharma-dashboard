@@ -14,8 +14,8 @@ exports.addServices = async (value) => {
     if (!value.text) throw new Error('text is required');
 
      let items = {
-        bannerImage: value.bannerImage,
-      //  bannerText: value.bannerText,
+       // bannerImage: value.bannerImage,
+       // bannerText: value.bannerText,
         heading: value.heading,
         text: value.text,
         created_on: new Date(Date.now())

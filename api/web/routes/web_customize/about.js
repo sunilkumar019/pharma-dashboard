@@ -14,7 +14,7 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage });
 
-router.post('/add',upload.fields([{name:"bannerImage",maxCount:1},{name:"imageUrl",maxCount:4}]), aboutHandler.addAbout);
+router.post('/add',upload.fields([{name:"bannerImage",maxCount:1},{name:"imageUrl",maxCount:4},{name:"imageUrl2",maxCount:4}]),aboutHandler.addAbout);
 router.get('/get', aboutHandler.getAbout);
 router.put('/update', aboutHandler.updateAbout);
 router.delete('/delete/:Id', aboutHandler.deleteAbout);
