@@ -45,7 +45,7 @@ class TestPagination extends Component {
         .map(({ name }) => name)
         .join("");
       formattedData.push({
-        Sr: apiData.findIndex((value) => data == value) + 1,
+        Sr: apiData.findIndex((value) => data === value) + 1,
         Date: data.date,
         "Distributor Name": distributorName,
         "MR Name": mrName,

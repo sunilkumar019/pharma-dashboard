@@ -1,5 +1,5 @@
 const router = require('express').Router()
-    //import handler and setting endpoints
+//import handler and setting endpoints
 router.use("/division/", require("./division"));
 router.use("/product/", require("./product"));
 router.use("/offer/", require("./offer"))
@@ -16,11 +16,13 @@ router.use("/enquiry/", require("./enquiry"))
 router.use("/certificate/", require("./certificate"))
 router.use("/reports", require("./reports"))
 router.use("/dashboard", require("./dashboard.js"))
-
 router.use("/employee/", require("./employee"))
 
-
-
+//website routes
+router.use("/customizehome/", require("./web_customize/home"));
+router.use("/customizeabout/", require("./web_customize/about"));
+router.use("/customizeservices/", require("./web_customize/services"));
+router.use("/customizecontact/", require("./web_customize/contact"));
 
 //not found checker
 router.use((req, res, next) => {

@@ -89,7 +89,7 @@ class Contact extends Component {
                                         <strong>Contact Us Anytime</strong>
                                     </CardTitle>
                                     <CardText>
-                                        <a className="globalColor10" href="">{this.props.value.phone}</a>
+                                        <a className="globalColor10" href="#">{this.props.value.phone}</a>
                                     </CardText>
 
                                 </Card>
@@ -101,7 +101,7 @@ class Contact extends Component {
                                         <strong>Write Some Words</strong>
                                     </CardTitle>
                                     <CardText>
-                                        <a className="globalColor10" href="">{this.props.value.email}</a>
+                                        <a className="globalColor10" href="#">{this.props.value.email}</a>
                                     </CardText>
 
                                 </Card>
@@ -254,7 +254,7 @@ const Contact = () => {
                                     <strong>Our Location</strong>
                                 </CardTitle>
                                 <CardText>
-                                    <a className="text-success" href="">Ground floor 101/2 - Rani bagh
+                                    <a className="text-success" "#">Ground floor 101/2 - Rani bagh
                                         Ambala Cantt, 133001, Haryana,</a>
                                 </CardText>
 
@@ -267,7 +267,7 @@ const Contact = () => {
                                     <strong>Contact Us Anytime</strong>
                                 </CardTitle>
                                 <CardText>
-                                    <a className="text-success" href="">+91 7015957123</a>
+                                    <a className="text-success" href="#">+91 7015957123</a>
                                 </CardText>
 
                             </Card>
@@ -279,7 +279,7 @@ const Contact = () => {
                                     <strong>Write Some Words</strong>
                                 </CardTitle>
                                 <CardText>
-                                    <a className="text-success" href="">dexonbiotech@gmail.com
+                                    <a className="text-success" href="#">dexonbiotech@gmail.com
                                         ambalavivek@gmail.com</a>
                                 </CardText>
 

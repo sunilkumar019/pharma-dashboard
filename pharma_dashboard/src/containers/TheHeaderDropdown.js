@@ -67,7 +67,7 @@ const TheHeaderDropdown = () => {
 
   const handleClickOpen = function () { 
   
-      window.open('http://localhost:3000/#/managePages',"_blank");
+  window.open('http://localhost:8080',"_blank");
     
    }
 

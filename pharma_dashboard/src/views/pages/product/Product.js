@@ -359,11 +359,8 @@ class Products extends Component {
                     </Col>
                   </Row>
                 </div>
-
-                <Row style={{ marginTop: "20px" }}>
-
-
-                  <Col xs="12" sm="6">
+                 <Row style={{ marginTop: "20px" }}>
+                   <Col xs="12" sm="6">
                     <fieldset className="field-container" style={{ marginBottom: "8px" }}>
                       <input type="text" value={this.state.search} onChange={(e) => this.onSearch(e)}
                              placeholder="Search..." className="field-search" />
