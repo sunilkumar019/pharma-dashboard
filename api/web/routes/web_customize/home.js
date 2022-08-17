@@ -19,7 +19,7 @@ let storage = multer.diskStorage({
   
   let upload = multer({ storage: storage })
   
-router.post('/add', homeHandler.addHome);
+router.post('/add',upload.fields([{name:"carouselImages",maxCount:3},{name:"image",maxCount:4}]), homeHandler.addHome);
 router.get('/get', homeHandler.getHome);
 router.post('/update', homeHandler.updateHome);
 router.get('/delete/:Id', homeHandler.deleteHome);

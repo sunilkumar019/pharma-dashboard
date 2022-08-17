@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const cardSchema = new mongoose.Schema({
     image: { type: String, default: null },
     text: { type: String, required: [true, "Text is required"] },
-});;
+});
 const serviceSchema = new mongoose.Schema({
     serviceHeading: { type: String, required: [true, "Service heading is required"] },
     serviceCards:[{

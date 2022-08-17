@@ -9,28 +9,35 @@ const moment = require("moment");
 
 //add method
 exports.addHome = async (homeImages,value) => {
-      await homeModel.deleteMany({})
+    //  await homeModel.deleteMany({})
 
     if (!value.cardList) throw new Error('Card list  is required');
     if (!value.servicesList) throw new Error('Services list  is required');
     if (!value.productDetails) throw new Error('Product details is required');
 
+    if(homeImages){
+        if(homeImages.carouselImages){
+            homeImages.carouselImages.forEach((it)=>{
+               value.carouselImages=it.path
+               
+               console.log(value.carouselImages)
+            }) 
+        }
 
-
-
-
+    }
+    
     let cusHome = {
 
-       carouselImages:value.carouselImages,
-       cardList:value.cardList,
-       servicesList:value.servicesList,
-       productDetails:value.productDetails,
+        carouselImages:value.carouselImages,
+       cardList:JSON.parse(value.cardList),
+       servicesList:JSON.parse(value.servicesList),
+       productDetails:JSON.parse(value.productDetails),
         created_on: new Date(Date.now())
     }
-
-    let savedHome = await addHome(cusHome);
-    delete savedHome.__v
-    return savedHome;
+console.log(cusHome)
+    // let savedHome = await addHome(cusHome);
+    // delete savedHome.__v
+    // return savedHome;
 
 }
 

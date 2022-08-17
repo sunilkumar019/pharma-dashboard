@@ -5,9 +5,9 @@ const homeController = require("../../../../core/controllers/web_customize/home"
 
 
 const addHome = async (req, res, next) => {
-   // console.log(req.body)
+   console.log(req.files)
     try {
-        let customize = await homeController.addHome(req.body)
+        let customize = await homeController.addHome( req.files,req.body)
         req.data = customize
         next()
     }
